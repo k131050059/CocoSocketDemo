@@ -142,6 +142,8 @@
 				TargetAttributes = {
 					3461F26A1C9935DE00585698 = {
 						CreatedOnToolsVersion = 7.2;
+						DevelopmentTeam = VZ4C3W749T;
+						ProvisioningStyle = Manual;
 					};
 				};
 			};
@@ -343,11 +345,14 @@
 			baseConfigurationReference = 7B736B97BE7917C4CB255168 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = VZ4C3W749T;
 				INFOPLIST_FILE = CocoSocketDemo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.soooner.CocoSocketDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = tongyong;
 			};
 			name = Debug;
 		};
@@ -356,11 +361,14 @@
 			baseConfigurationReference = C51E39F40292CD4849A6573D /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = VZ4C3W749T;
 				INFOPLIST_FILE = CocoSocketDemo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.soooner.CocoSocketDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = tongyong;
 			};
 			name = Release;
 		};

@@ -107,6 +107,7 @@
                 <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="M0Q-8L-g3c" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="3Mt-S5-3T9">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                     </tabBar>
@@ -213,6 +214,14 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2gg-ry-dM8">
+                                <rect key="frame" x="234" y="183" width="62" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="断开连接"/>
+                                <connections>
+                                    <action selector="disconnectbtnclick:" destination="w9P-Jo-oDW" eventType="touchUpInside" id="Ezr-sD-EF6"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <variation key="default">
@@ -245,6 +254,7 @@
                     <navigationItem key="navigationItem" title="客户端" id="FOe-7k-jdl"/>
                     <connections>
                         <outlet property="addressTF" destination="KPL-DQ-zpO" id="vZQ-Ay-YjC"/>
+                        <outlet property="disbtn" destination="2gg-ry-dM8" id="1g0-FL-UCk"/>
                         <outlet property="messageTF" destination="hy2-NL-PrK" id="oxb-W0-Ayi"/>
                         <outlet property="portTF" destination="DBk-UZ-VAb" id="fwc-Jh-8Cr"/>
                         <outlet property="showMessageTF" destination="ARg-pa-dpJ" id="ZKR-CN-RXR"/>

@@ -9,6 +9,7 @@
 #import "ClientController.h"
 #import <GCDAsyncSocket.h>
 @interface ClientController ()<GCDAsyncSocketDelegate>
+@property (weak, nonatomic) IBOutlet UIButton *disbtn;
 @property (weak, nonatomic) IBOutlet UITextField *addressTF;
 @property (weak, nonatomic) IBOutlet UITextField *portTF;
 @property (weak, nonatomic) IBOutlet UITextField *messageTF;
@@ -23,17 +24,17 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     // 1.初始化
+    //创建socket并指定代理对象为self,代理队列必须为主队列.
     self.clientSocket = [[GCDAsyncSocket alloc]initWithDelegate:self delegateQueue:dispatch_get_main_queue()];
-    
-    
 }
 
 // 开始连接
 - (IBAction)connectAction:(id)sender {
 // 2.链接服务器
     [self.clientSocket connectToHost:self.addressTF.text onPort:self.portTF.text.integerValue viaInterface:nil withTimeout:-1 error:nil];
-    
-
+}
+- (IBAction)disconnectbtnclick:(id)sender {
+    [self.clientSocket disconnect];
 }
 
 // 发送消息
@@ -81,17 +82,11 @@
 
 
 
-// 链接成功
-
-//- (void)socket:(GCDAsyncSocket *)sock didConnectToHost:(NSString *)host port:(uint16_t)port{
-//    
-//    NSLog(@"链接成功");
-//}
-
+ 
 // 链接失败
 - (void)socketDidDisconnect:(GCDAsyncSocket *)sock withError:(NSError *)err{
-    
-    NSLog(@"链接失败");
+     [self showMessageWithStr:@"链接断开"];
+   
 }
 
 @end
