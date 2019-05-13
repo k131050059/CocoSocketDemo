@@ -16,9 +16,30 @@
 @property (weak, nonatomic) IBOutlet UITextView *showMessageTF;
 // 客户端socket
 @property (strong, nonatomic) GCDAsyncSocket *clientSocket;
+
+@property (nonatomic, strong) NSTimer *connectTimer;
+
 @end
 
 @implementation ClientController
+- (void)addTimer
+{
+    // 长连接定时器
+    self.connectTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(longConnectToSocket) userInfo:nil repeats:YES];
+    // 把定时器添加到当前运行循环,并且调为通用模式
+    [[NSRunLoop currentRunLoop] addTimer:self.connectTimer forMode:NSRunLoopCommonModes];
+}
+// 心跳连接
+- (void)longConnectToSocket
+{
+    // 发送固定格式的数据,指令@"longConnect"
+    float version = [[UIDevice currentDevice] systemVersion].floatValue;
+    NSString *longConnect = [NSString stringWithFormat:@"心跳%f",version];
+    
+    NSData  *data = [longConnect dataUsingEncoding:NSUTF8StringEncoding];
+    
+    [self.clientSocket writeData:data withTimeout:- 1 tag:0];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -56,10 +77,11 @@
     NSLog(@"链接成功");
 
     [self showMessageWithStr:[NSString stringWithFormat:@"服务器IP: %@", host]];
-//    NSLog(@"%@",_clientSocket);
-    [self.clientSocket readDataWithTimeout:- 1 tag:0];
-
     
+    // 连接成功开启定时器
+    [self addTimer];
+    
+    [self.clientSocket readDataWithTimeout:- 1 tag:0];
 }
 
 // 收到消息
@@ -79,14 +101,11 @@
 - (void)showMessageWithStr:(NSString *)str {
     self.showMessageTF.text = [self.showMessageTF.text stringByAppendingFormat:@"%@\n", str];
 }
-
-
-
  
-// 链接失败
+// 链接断开
 - (void)socketDidDisconnect:(GCDAsyncSocket *)sock withError:(NSError *)err{
      [self showMessageWithStr:@"链接断开"];
-   
+    [self.connectTimer invalidate];
 }
 
 @end
